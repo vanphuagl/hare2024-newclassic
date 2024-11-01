@@ -1,6 +1,21 @@
 "use strict";
 
-// ===== get height app =====
+// ===== init =====
+const init = () => {
+    // # app-height
+    appHeight();
+    // # lenis
+    initLenis();
+    // # firstview
+    const swiperFv = new Swiper("[data-fv-swiper]", {
+        effect: "fade",
+        speed: 2000,
+        autoplay: {
+            delay: 1500,
+        },
+    });
+}
+
 const appHeight = () => {
     const doc = document.documentElement;
     doc.style.setProperty(
@@ -10,12 +25,14 @@ const appHeight = () => {
 };
 window.addEventListener("resize", appHeight);
 
-// ===== home =====
-const homeFunc = () => {
-
+const initLenis = () => {
+    const lenis = new Lenis({});
+    lenis.on('scroll', (e) => { });
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 }
 
-window.onload = () => {
-    appHeight();
-    homeFunc();
-};
+window.addEventListener('DOMContentLoaded', init);
